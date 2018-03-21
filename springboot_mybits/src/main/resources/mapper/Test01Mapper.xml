@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.springboot_mybits.mapper.Test01Mapper">
+
+	<select id="testList" resultType="com.dj.springboot_mybits.pojo.Test01">
+		SELECT * FROM test01
+	</select>
+
+	<select id="test01" parameterType="Integer" resultType="com.dj.springboot_mybits.pojo.Test01">
+		SELECT * FROM test01 WHERE id = #{id}
+	</select>
+
+	<insert id="addTest" parameterType="com.dj.springboot_mybits.pojo.Test01" >
+		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO test01 (name) VALUES (#{name})
+	</insert>
+
+	<update id="updateTest" parameterType="com.dj.springboot_mybits.pojo.Test01">
+		UPDATE test01 SET name = #{name} WHERE id = #{id}
+	</update>
+
+	<delete id="deleteTest" parameterType="Integer">
+		DELETE FROM test01 WHERE id = #{id}
+	</delete>
+</mapper>

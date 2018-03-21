@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table width="100%" border="1" cellspacing="1" cellpadding="0">
+        <tr>
+            <td>id</td>
+            <td>姓名</td>
+            <td>性別</td>
+            <td>年龄</td>
+            <td>状态</td>
+            <td>select</td>
+            <td>url</td>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.id}"></td>
+            <td><input type="text" th:value="${user.username}"><input type="radio" th:if="${user.id == 1}"/></td>
+            <td>
+                男：<input type="radio" th:checked="${user.sex == 1}"/>
+                女：<input type="radio" th:checked="${user.sex == 2}"/>
+            </td>
+            <td><input th:type="text" th:value="${user.age}"></td>
+            <td th:switch="${user.status}">
+                <span th:case="1">已死亡</span>
+                <span th:case="2">命不久矣</span>
+                <span th:case="*">生死未卜</span>
+            </td>
+            <td>
+                <select>
+                    <option>请选择</option>
+                    <option th:selected="${user.id % 2 == 0}">人类</option>
+                    <option th:selected="${user.id % 2 != 0}">非人类</option>
+                </select>
+            </td>
+            <td><a th:href="${user.url}" target="_blank">胆小慎入！！！</a></td>
+    </table>
+</body>
+</html>
